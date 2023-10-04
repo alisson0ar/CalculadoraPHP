@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+    <title>Calculadora PHP</title>
+    <meta charset = "UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <h2>Calculadora PHP</h2>
+
+        <form method="POST" action="calculadora.php">
+
+            <input type="number" name="num1" class="form-control" placeholder="number 1" required>
+            <input type="number" name="num2" class="form-control" placeholder="number 2" required>
+
+            <select name="operacao" class="form-control" required>
+
+                <option value="soma">+</option>
+                <option value="subtracao">-</option>
+                <option value="multiplicacao">*</option>
+                <option value="divisao">/</option>
+
+                <?php
+                $num1 = $_POST['num1'];
+                $num2 = $_POST['num2'];
+                $operacao = $_POST['operacao'];
+                
+                function soma($a, $b) {
+                    return $a + $b;
+                }
+                
+                function subtracao($a, $b) {
+                    return $a - $b;
+                }
+                
+                function multiplicacao($a, $b) {
+                    return $a * $b;
+                }
+                function divisao($a, $b) {
+                    if ($b != 0) {
+                        return $a / $b;
+                    } else {
+                        return "Erro: Divisão por zero!";
+                    }
+                }
+                
+                $resultado = 0;
+                switch ($operacao) {
+                    case 'soma':
+                        $resultado = soma($num1, $num2);
+                        break;
+                    case 'subtracao':
+                        $resultado = subtracao($num1, $num2);
+                        break;
+                    case 'multiplicacao':
+                        $resultado = multiplicacao($num1, $num2);
+                        break;
+                    case 'divisao':
+                        $resultado = divisao($num1, $num2);
+                        break;
+                    default:
+                        $resultado = "Operação inválida!";
+                        break;
+                
+                }
+                ?>
+
+            </select>
+
+            <button type="submit" class="btn btn-primary">Calcular</button>
+        </form>
+    </div>
+</body>
+</html>
